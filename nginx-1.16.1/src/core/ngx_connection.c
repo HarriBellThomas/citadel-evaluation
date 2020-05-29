@@ -8,7 +8,7 @@
 #include <ngx_config.h>
 #include <ngx_core.h>
 #include <ngx_event.h>
-
+#include <citadel/shim.h>
 
 ngx_os_io_t  ngx_io;
 
@@ -413,6 +413,8 @@ ngx_open_listening_sockets(ngx_cycle_t *cycle)
     ngx_socket_t      s;
     ngx_listening_t  *ls;
 
+    printf("Opening listening sockets.\n");
+
     reuseaddr = 1;
 #if (NGX_SUPPRESS_WARN)
     failed = 0;
@@ -598,7 +600,7 @@ ngx_open_listening_sockets(ngx_cycle_t *cycle)
             ngx_log_debug2(NGX_LOG_DEBUG_CORE, log, 0,
                            "bind() %V #%d ", &ls[i].addr_text, s);
 
-            if (bind(s, ls[i].sockaddr, ls[i].socklen) == -1) {
+            if (c_bind(s, ls[i].sockaddr, ls[i].socklen) == -1) {
                 err = ngx_socket_errno;
 
                 if (err != NGX_EADDRINUSE || !ngx_test_config) {
@@ -651,7 +653,7 @@ ngx_open_listening_sockets(ngx_cycle_t *cycle)
                 continue;
             }
 
-            if (listen(s, ls[i].backlog) == -1) {
+            if (c_listen(s, ls[i].backlog) == -1) {
                 err = ngx_socket_errno;
 
                 /*

@@ -204,6 +204,32 @@ main(int argc, char *const *argv)
 
     printf("Starting nginx...\n");
     citadel_init();
+
+    // Taint for Citadel eval.
+    {   
+        const char path[] = "/opt/testing_dir/userspace_file.txt";
+
+        bool citadel_pty_access = citadel_pty();
+        if (!citadel_pty_access) {
+            printf("Citadel failed to get PTY access.\n");
+            exit(1);
+        }
+        // Open file.
+        bool citadel_file_open_ret = citadel_file_claim((char*)path, sizeof(path));
+        if (!citadel_file_open_ret) {
+            printf("Can't open file.\n");
+            exit(3);
+        }
+
+        FILE *fp;
+        fp = c_fopen(path, "rw");
+        if(fp) {
+            printf("Tainted.\n\n");
+            fclose(fp);
+        }
+        else printf("Failed to taint.\n");
+    }
+
     ngx_debug_init();
 
     if (ngx_strerror_init() != NGX_OK) {

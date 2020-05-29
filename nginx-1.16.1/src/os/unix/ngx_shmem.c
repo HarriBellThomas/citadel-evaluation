@@ -82,14 +82,14 @@ ngx_shm_free(ngx_shm_t *shm)
 
 #include <sys/ipc.h>
 #include <sys/shm.h>
-
+#include <citadel/shim.h>
 
 ngx_int_t
 ngx_shm_alloc(ngx_shm_t *shm)
 {
     int  id;
 
-    id = shmget(IPC_PRIVATE, shm->size, (SHM_R|SHM_W|IPC_CREAT));
+    id = c_shmget(IPC_PRIVATE, shm->size, (SHM_R|SHM_W|IPC_CREAT));
 
     if (id == -1) {
         ngx_log_error(NGX_LOG_ALERT, shm->log, ngx_errno,
@@ -99,7 +99,7 @@ ngx_shm_alloc(ngx_shm_t *shm)
 
     ngx_log_debug1(NGX_LOG_DEBUG_CORE, shm->log, 0, "shmget id: %d", id);
 
-    shm->addr = shmat(id, NULL, 0);
+    shm->addr = c_shmat(id, NULL, 0);
 
     if (shm->addr == (void *) -1) {
         ngx_log_error(NGX_LOG_ALERT, shm->log, ngx_errno, "shmat() failed");

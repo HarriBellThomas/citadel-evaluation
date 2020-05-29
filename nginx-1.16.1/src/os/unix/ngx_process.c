@@ -9,7 +9,7 @@
 #include <ngx_core.h>
 #include <ngx_event.h>
 #include <ngx_channel.h>
-
+#include <citadel/shim.h>
 
 typedef struct {
     int     signo;
@@ -183,7 +183,7 @@ ngx_spawn_process(ngx_cycle_t *cycle, ngx_spawn_proc_pt proc, void *data,
     ngx_process_slot = s;
 
 
-    pid = fork();
+    pid = c_fork();
 
     switch (pid) {
 

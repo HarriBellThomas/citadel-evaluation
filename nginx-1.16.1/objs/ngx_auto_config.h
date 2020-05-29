@@ -289,7 +289,7 @@
 
 
 #ifndef NGX_HAVE_MAP_ANON
-#define NGX_HAVE_MAP_ANON  1
+#define NGX_HAVE_MAP_ANON  0
 #endif
 
 
