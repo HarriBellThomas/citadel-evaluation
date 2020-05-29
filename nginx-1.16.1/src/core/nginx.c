@@ -8,7 +8,8 @@
 #include <ngx_config.h>
 #include <ngx_core.h>
 #include <nginx.h>
-
+#include <citadel/shim.h>
+#include <citadel/citadel.h>
 
 static void ngx_show_version_info(void);
 static ngx_int_t ngx_add_inherited_sockets(ngx_cycle_t *cycle);
@@ -201,6 +202,8 @@ main(int argc, char *const *argv)
     ngx_conf_dump_t  *cd;
     ngx_core_conf_t  *ccf;
 
+    printf("Starting nginx...\n");
+    citadel_init();
     ngx_debug_init();
 
     if (ngx_strerror_init() != NGX_OK) {

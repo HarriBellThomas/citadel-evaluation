@@ -1,9 +1,4 @@
-#define NGX_CONFIGURE " --sbin-path=/usr/local/nginx/nginx --conf-path=/usr/local/nginx/nginx.conf --pid-path=/usr/local/nginx/nginx.pid"
-
-#ifndef NGX_COMPILER
-#define NGX_COMPILER  "gcc 8.4.0 (Ubuntu 8.4.0-1ubuntu1~18.04) "
-#endif
-
+#define NGX_CONFIGURE ""
 
 #ifndef NGX_HAVE_GCC_ATOMIC
 #define NGX_HAVE_GCC_ATOMIC  1
@@ -409,22 +404,22 @@
 
 
 #ifndef NGX_CONF_PREFIX
-#define NGX_CONF_PREFIX  "/usr/local/nginx/"
+#define NGX_CONF_PREFIX  "conf/"
 #endif
 
 
 #ifndef NGX_SBIN_PATH
-#define NGX_SBIN_PATH  "/usr/local/nginx/nginx"
+#define NGX_SBIN_PATH  "sbin/nginx"
 #endif
 
 
 #ifndef NGX_CONF_PATH
-#define NGX_CONF_PATH  "/usr/local/nginx/nginx.conf"
+#define NGX_CONF_PATH  "conf/nginx.conf"
 #endif
 
 
 #ifndef NGX_PID_PATH
-#define NGX_PID_PATH  "/usr/local/nginx/nginx.pid"
+#define NGX_PID_PATH  "logs/nginx.pid"
 #endif
 
 

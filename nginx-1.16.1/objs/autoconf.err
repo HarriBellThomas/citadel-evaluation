@@ -5,10 +5,6 @@ checking for C compiler
 
 
 ----------------------------------------
-checking for gcc -pipe switch
-
-
-----------------------------------------
 checking for -Wl,-E switch
 
 
@@ -153,7 +149,7 @@ int main(void) {
 }
 
 ----------
-cc -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64 -o objs/autotest objs/autotest.c
+cc -pipe -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g -I/build/kernel/linux-5.6/security/citadel/daemon/libcitadel/include -lcitadel -L/build/kernel/linux-5.6/security/citadel/daemon/libcitadel -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64 -o objs/autotest objs/autotest.c
 ----------
 
 ----------------------------------------
@@ -175,14 +171,14 @@ int main(void) {
 }
 
 ----------
-cc -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64 -o objs/autotest objs/autotest.c
+cc -pipe -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g -I/build/kernel/linux-5.6/security/citadel/daemon/libcitadel/include -lcitadel -L/build/kernel/linux-5.6/security/citadel/daemon/libcitadel -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64 -o objs/autotest objs/autotest.c
 ----------
 
 ----------------------------------------
 checking for crypt()
 
-/usr/local/bin/ld: /tmp/ccR6SWsa.o: in function `main':
-autotest.c:(.text+0x13): undefined reference to `crypt'
+/usr/local/bin/ld: /tmp/ccRz8AqU.o: in function `main':
+/opt/playground/eval/nginx-1.16.1/objs/autotest.c:7: undefined reference to `crypt'
 collect2: error: ld returned 1 exit status
 ----------
 
@@ -196,7 +192,7 @@ int main(void) {
 }
 
 ----------
-cc -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64 -o objs/autotest objs/autotest.c
+cc -pipe -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g -I/build/kernel/linux-5.6/security/citadel/daemon/libcitadel/include -lcitadel -L/build/kernel/linux-5.6/security/citadel/daemon/libcitadel -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64 -o objs/autotest objs/autotest.c
 ----------
 
 ----------------------------------------
@@ -224,7 +220,7 @@ int main(void) {
 }
 
 ----------
-cc -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64 -o objs/autotest objs/autotest.c
+cc -pipe -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g -I/build/kernel/linux-5.6/security/citadel/daemon/libcitadel/include -lcitadel -L/build/kernel/linux-5.6/security/citadel/daemon/libcitadel -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64 -o objs/autotest objs/autotest.c
 ----------
 
 ----------------------------------------
@@ -255,20 +251,21 @@ int main(void) {
 }
 
 ----------
-cc -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64 -o objs/autotest objs/autotest.c
+cc -pipe -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g -I/build/kernel/linux-5.6/security/citadel/daemon/libcitadel/include -lcitadel -L/build/kernel/linux-5.6/security/citadel/daemon/libcitadel -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64 -o objs/autotest objs/autotest.c
 ----------
 
 ----------------------------------------
 checking for directio()
 
 objs/autotest.c: In function 'main':
-objs/autotest.c:8:5: warning: implicit declaration of function 'directio' [-Wimplicit-function-declaration]
+objs/autotest.c:8:5: error: implicit declaration of function 'directio' [-Werror=implicit-function-declaration]
      directio(0, DIRECTIO_ON);;
      ^~~~~~~~
 objs/autotest.c:8:17: error: 'DIRECTIO_ON' undeclared (first use in this function)
      directio(0, DIRECTIO_ON);;
                  ^~~~~~~~~~~
 objs/autotest.c:8:17: note: each undeclared identifier is reported only once for each function it appears in
+cc1: all warnings being treated as errors
 ----------
 
 #include <sys/types.h>
@@ -282,7 +279,7 @@ int main(void) {
 }
 
 ----------
-cc -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64 -o objs/autotest objs/autotest.c
+cc -pipe -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g -I/build/kernel/linux-5.6/security/citadel/daemon/libcitadel/include -lcitadel -L/build/kernel/linux-5.6/security/citadel/daemon/libcitadel -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64 -o objs/autotest objs/autotest.c
 ----------
 
 ----------------------------------------
@@ -296,9 +293,9 @@ checking for statvfs()
 ----------------------------------------
 checking for dlopen()
 
-/usr/local/bin/ld: /tmp/ccK3gG1n.o: in function `main':
-autotest.c:(.text+0xf): undefined reference to `dlopen'
-/usr/local/bin/ld: autotest.c:(.text+0x20): undefined reference to `dlsym'
+/usr/local/bin/ld: /tmp/ccN8pVkf.o: in function `main':
+/opt/playground/eval/nginx-1.16.1/objs/autotest.c:7: undefined reference to `dlopen'
+/usr/local/bin/ld: /opt/playground/eval/nginx-1.16.1/objs/autotest.c:7: undefined reference to `dlsym'
 collect2: error: ld returned 1 exit status
 ----------
 
@@ -312,7 +309,7 @@ int main(void) {
 }
 
 ----------
-cc -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64 -o objs/autotest objs/autotest.c
+cc -pipe -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g -I/build/kernel/linux-5.6/security/citadel/daemon/libcitadel/include -lcitadel -L/build/kernel/linux-5.6/security/citadel/daemon/libcitadel -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64 -o objs/autotest objs/autotest.c
 ----------
 
 ----------------------------------------
@@ -347,7 +344,7 @@ int main(void) {
 }
 
 ----------
-cc -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64 -o objs/autotest objs/autotest.c
+cc -pipe -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g -I/build/kernel/linux-5.6/security/citadel/daemon/libcitadel/include -lcitadel -L/build/kernel/linux-5.6/security/citadel/daemon/libcitadel -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64 -o objs/autotest objs/autotest.c
 ----------
 
 ----------------------------------------
@@ -375,7 +372,7 @@ int main(void) {
 }
 
 ----------
-cc -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64 -o objs/autotest objs/autotest.c
+cc -pipe -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g -I/build/kernel/linux-5.6/security/citadel/daemon/libcitadel/include -lcitadel -L/build/kernel/linux-5.6/security/citadel/daemon/libcitadel -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64 -o objs/autotest objs/autotest.c
 ----------
 
 ----------------------------------------
@@ -399,7 +396,7 @@ int main(void) {
 }
 
 ----------
-cc -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64 -o objs/autotest objs/autotest.c
+cc -pipe -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g -I/build/kernel/linux-5.6/security/citadel/daemon/libcitadel/include -lcitadel -L/build/kernel/linux-5.6/security/citadel/daemon/libcitadel -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64 -o objs/autotest objs/autotest.c
 ----------
 
 ----------------------------------------
@@ -428,7 +425,7 @@ int main(void) {
 }
 
 ----------
-cc -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64 -o objs/autotest objs/autotest.c
+cc -pipe -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g -I/build/kernel/linux-5.6/security/citadel/daemon/libcitadel/include -lcitadel -L/build/kernel/linux-5.6/security/citadel/daemon/libcitadel -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64 -o objs/autotest objs/autotest.c
 ----------
 
 ----------------------------------------
@@ -457,7 +454,7 @@ int main(void) {
 }
 
 ----------
-cc -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64 -o objs/autotest objs/autotest.c
+cc -pipe -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g -I/build/kernel/linux-5.6/security/citadel/daemon/libcitadel/include -lcitadel -L/build/kernel/linux-5.6/security/citadel/daemon/libcitadel -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64 -o objs/autotest objs/autotest.c
 ----------
 
 ----------------------------------------
@@ -482,7 +479,7 @@ int main(void) {
 }
 
 ----------
-cc -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64 -o objs/autotest objs/autotest.c
+cc -pipe -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g -I/build/kernel/linux-5.6/security/citadel/daemon/libcitadel/include -lcitadel -L/build/kernel/linux-5.6/security/citadel/daemon/libcitadel -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64 -o objs/autotest objs/autotest.c
 ----------
 
 ----------------------------------------
@@ -593,13 +590,11 @@ checking for AF_INET6
 checking for setproctitle()
 
 objs/autotest.c: In function 'main':
-objs/autotest.c:7:5: warning: implicit declaration of function 'setproctitle'; did you mean 'setstate'? [-Wimplicit-function-declaration]
+objs/autotest.c:7:5: error: implicit declaration of function 'setproctitle'; did you mean 'setstate'? [-Werror=implicit-function-declaration]
      setproctitle("test");;
      ^~~~~~~~~~~~
      setstate
-/usr/local/bin/ld: /tmp/ccnOzBKS.o: in function `main':
-autotest.c:(.text+0x11): undefined reference to `setproctitle'
-collect2: error: ld returned 1 exit status
+cc1: all warnings being treated as errors
 ----------
 
 #include <sys/types.h>
@@ -612,7 +607,7 @@ int main(void) {
 }
 
 ----------
-cc -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64 -o objs/autotest objs/autotest.c
+cc -pipe -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g -I/build/kernel/linux-5.6/security/citadel/daemon/libcitadel/include -lcitadel -L/build/kernel/linux-5.6/security/citadel/daemon/libcitadel -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64 -o objs/autotest objs/autotest.c
 ----------
 
 ----------------------------------------
@@ -630,8 +625,8 @@ checking for pwritev()
 ----------------------------------------
 checking for sys_nerr
 
-/usr/local/bin/ld: /tmp/ccxlbqd1.o: in function `main':
-autotest.c:(.text+0x6): warning: `sys_nerr' is deprecated; use `strerror' or `strerror_r' instead
+/usr/local/bin/ld: /tmp/ccE4nzwT.o: in function `printf':
+/usr/include/x86_64-linux-gnu/bits/stdio2.h:104: warning: `sys_nerr' is deprecated; use `strerror' or `strerror_r' instead
 135
 ----------------------------------------
 checking for localtime_r()
@@ -664,9 +659,9 @@ checking for System V shared memory
 ----------------------------------------
 checking for POSIX semaphores
 
-/usr/local/bin/ld: /tmp/cc1EmHuo.o: in function `main':
-autotest.c:(.text+0x29): undefined reference to `sem_init'
-/usr/local/bin/ld: autotest.c:(.text+0x41): undefined reference to `sem_destroy'
+/usr/local/bin/ld: /tmp/ccxhOCLl.o: in function `main':
+/opt/playground/eval/nginx-1.16.1/objs/autotest.c:8: undefined reference to `sem_init'
+/usr/local/bin/ld: /opt/playground/eval/nginx-1.16.1/objs/autotest.c:9: undefined reference to `sem_destroy'
 collect2: error: ld returned 1 exit status
 ----------
 
@@ -682,7 +677,7 @@ int main(void) {
 }
 
 ----------
-cc -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64 -o objs/autotest objs/autotest.c
+cc -pipe -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g -I/build/kernel/linux-5.6/security/citadel/daemon/libcitadel/include -lcitadel -L/build/kernel/linux-5.6/security/citadel/daemon/libcitadel -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64 -o objs/autotest objs/autotest.c
 ----------
 
 ----------------------------------------
@@ -713,6 +708,10 @@ objs/autotest.c:9:42: error: 'struct dirent' has no member named 'd_namlen'; did
                    printf("%d", (int) dir.d_namlen);
                                           ^~~~~~~~
                                           d_name
+objs/autotest.c:8:20: error: variable 'dir' set but not used [-Werror=unused-but-set-variable]
+     struct dirent  dir; dir.d_namlen = 0;
+                    ^~~
+cc1: all warnings being treated as errors
 ----------
 
 #include <sys/types.h>
@@ -727,7 +726,7 @@ int main(void) {
 }
 
 ----------
-cc -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64 -o objs/autotest objs/autotest.c
+cc -pipe -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g -I/build/kernel/linux-5.6/security/citadel/daemon/libcitadel/include -lcitadel -L/build/kernel/linux-5.6/security/citadel/daemon/libcitadel -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64 -o objs/autotest objs/autotest.c
 ----------
 
 ----------------------------------------
