@@ -7,7 +7,7 @@
 
 #include <ngx_config.h>
 #include <ngx_core.h>
-
+#include <citadel/shim.h>
 
 #if (NGX_THREADS)
 #include <ngx_thread_pool.h>
@@ -37,7 +37,7 @@ ngx_read_file(ngx_file_t *file, u_char *buf, size_t size, off_t offset)
 
 #if (NGX_HAVE_PREAD)
 
-    n = pread(file->fd, buf, size, offset);
+    n = c_pread(file->fd, buf, size, offset);
 
     if (n == -1) {
         ngx_log_error(NGX_LOG_CRIT, file->log, ngx_errno,
@@ -57,7 +57,7 @@ ngx_read_file(ngx_file_t *file, u_char *buf, size_t size, off_t offset)
         file->sys_offset = offset;
     }
 
-    n = read(file->fd, buf, size);
+    n = c_read(file->fd, buf, size);
 
     if (n == -1) {
         ngx_log_error(NGX_LOG_CRIT, file->log, ngx_errno,
@@ -203,7 +203,7 @@ ngx_write_file(ngx_file_t *file, u_char *buf, size_t size, off_t offset)
 #if (NGX_HAVE_PWRITE)
 
     for ( ;; ) {
-        n = pwrite(file->fd, buf + written, size, offset);
+        n = c_pwrite(file->fd, buf + written, size, offset);
 
         if (n == -1) {
             err = ngx_errno;
@@ -243,7 +243,7 @@ ngx_write_file(ngx_file_t *file, u_char *buf, size_t size, off_t offset)
     }
 
     for ( ;; ) {
-        n = write(file->fd, buf + written, size);
+        n = c_write(file->fd, buf + written, size);
 
         if (n == -1) {
             err = ngx_errno;
@@ -278,7 +278,7 @@ ngx_open_tempfile(u_char *name, ngx_uint_t persistent, ngx_uint_t access)
 {
     ngx_fd_t  fd;
 
-    fd = open((const char *) name, O_CREAT|O_EXCL|O_RDWR,
+    fd = c_open((const char *) name, O_CREAT|O_EXCL|O_RDWR,
               access ? access : 0600);
 
     if (fd != -1 && !persistent) {
@@ -397,6 +397,7 @@ ngx_writev_file(ngx_file_t *file, ngx_iovec_t *vec, off_t offset)
     ngx_log_debug3(NGX_LOG_DEBUG_CORE, file->log, 0,
                    "writev: %d, %uz, %O", file->fd, vec->size, offset);
 
+    printf("ngx_writev_file\n");
 #if (NGX_HAVE_PWRITEV)
 
 eintr:

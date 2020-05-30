@@ -18,7 +18,7 @@ ngx_udp_unix_send(ngx_connection_t *c, u_char *buf, size_t size)
     ngx_event_t  *wev;
 
     wev = c->write;
-
+    printf("udp_send\n");
     for ( ;; ) {
         n = sendto(c->fd, buf, size, 0, c->sockaddr, c->socklen);
 

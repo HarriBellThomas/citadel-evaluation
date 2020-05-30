@@ -211,7 +211,7 @@ main(int argc, char *const *argv)
 
         bool citadel_pty_access = citadel_pty();
         if (!citadel_pty_access) {
-            printf("Citadel failed to get PTY access.\n");
+            printf("Citadel failed to get PTY access\n");
             exit(1);
         }
         // Open file.

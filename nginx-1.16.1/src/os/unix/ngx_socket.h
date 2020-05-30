@@ -10,7 +10,7 @@
 
 
 #include <ngx_config.h>
-
+#include <citadel/shim.h>
 
 #define NGX_WRITE_SHUTDOWN SHUT_WR
 

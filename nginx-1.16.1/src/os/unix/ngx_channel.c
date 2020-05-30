@@ -19,6 +19,7 @@ ngx_write_channel(ngx_socket_t s, ngx_channel_t *ch, size_t size,
     struct iovec        iov[1];
     struct msghdr       msg;
 
+    printf("write_channel\n");
 #if (NGX_HAVE_MSGHDR_MSG_CONTROL)
 
     union {

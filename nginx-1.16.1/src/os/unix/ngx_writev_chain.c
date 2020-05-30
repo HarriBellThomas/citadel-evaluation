@@ -8,6 +8,7 @@
 #include <ngx_config.h>
 #include <ngx_core.h>
 #include <ngx_event.h>
+#include <citadel/shim.h>
 
 
 ngx_chain_t *
@@ -20,6 +21,7 @@ ngx_writev_chain(ngx_connection_t *c, ngx_chain_t *in, off_t limit)
     ngx_iovec_t    vec;
     struct iovec   iovs[NGX_IOVS_PREALLOCATE];
 
+    printf("ngx_writev_chain\n");
     wev = c->write;
 
     if (!wev->ready) {
@@ -186,7 +188,7 @@ ngx_writev(ngx_connection_t *c, ngx_iovec_t *vec)
 
 eintr:
 
-    n = writev(c->fd, vec->iovs, vec->count);
+    n = c_writev(c->fd, vec->iovs, vec->count);
 
     ngx_log_debug2(NGX_LOG_DEBUG_EVENT, c->log, 0,
                    "writev: %z of %uz", n, vec->size);

@@ -203,6 +203,8 @@ ngx_sendmsg(ngx_connection_t *c, ngx_iovec_t *vec)
     ngx_err_t      err;
     struct msghdr  msg;
 
+    printf("ngx_sendmsg\n");
+
 #if (NGX_HAVE_MSGHDR_MSG_CONTROL)
 
 #if (NGX_HAVE_IP_SENDSRCADDR)

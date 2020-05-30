@@ -11,6 +11,7 @@
 
 #include <ngx_config.h>
 #include <ngx_core.h>
+#include <citadel/shim.h>
 
 
 typedef int                      ngx_fd_t;
@@ -58,16 +59,16 @@ typedef struct {
 #endif
 
 #define ngx_open_file(name, mode, create, access)                            \
-    open((const char *) name, mode|create|O_BINARY, access)
+    c_open((const char *) name, mode|create|O_BINARY, access)
 
 #else
 
 #define ngx_open_file(name, mode, create, access)                            \
-    open((const char *) name, mode|create, access)
+    c_open((const char *) name, mode|create, access)
 
 #endif
 
-#define ngx_open_file_n          "open()"
+#define ngx_open_file_n          "c_open()"
 
 #define NGX_FILE_RDONLY          O_RDONLY
 #define NGX_FILE_WRONLY          O_WRONLY
@@ -116,7 +117,7 @@ typedef struct {
 
 ngx_fd_t ngx_open_tempfile(u_char *name, ngx_uint_t persistent,
     ngx_uint_t access);
-#define ngx_open_tempfile_n      "open()"
+#define ngx_open_tempfile_n      "c_open()"
 
 
 ssize_t ngx_read_file(ngx_file_t *file, u_char *buf, size_t size, off_t offset);
@@ -144,7 +145,7 @@ ssize_t ngx_write_chain_to_file(ngx_file_t *file, ngx_chain_t *ce,
 static ngx_inline ssize_t
 ngx_write_fd(ngx_fd_t fd, void *buf, size_t n)
 {
-    return write(fd, buf, n);
+    return c_write(fd, buf, n);
 }
 
 #define ngx_write_fd_n           "write()"

@@ -63,7 +63,6 @@ ngx_linux_sendfile_chain(ngx_connection_t *c, ngx_chain_t *in, off_t limit)
         return in;
     }
 
-
     /* the maximum limit size is 2G-1 - the page size */
 
     if (limit == 0 || limit > (off_t) (NGX_SENDFILE_MAXSIZE - ngx_pagesize)) {
@@ -78,7 +77,6 @@ ngx_linux_sendfile_chain(ngx_connection_t *c, ngx_chain_t *in, off_t limit)
 
     for ( ;; ) {
         prev_send = send;
-
         /* create the iovec and coalesce the neighbouring bufs */
 
         cl = ngx_output_chain_to_iovec(&header, in, limit - send, c->log);
@@ -97,7 +95,6 @@ ngx_linux_sendfile_chain(ngx_connection_t *c, ngx_chain_t *in, off_t limit)
             && cl->buf->in_file)
         {
             /* the TCP_CORK and TCP_NODELAY are mutually exclusive */
-
             if (c->tcp_nodelay == NGX_TCP_NODELAY_SET) {
 
                 tcp_nodelay = 0;
@@ -162,7 +159,6 @@ ngx_linux_sendfile_chain(ngx_connection_t *c, ngx_chain_t *in, off_t limit)
             /* coalesce the neighbouring file bufs */
 
             file_size = (size_t) ngx_chain_coalesce_file(&cl, limit - send);
-
             send += file_size;
 #if 1
             if (file_size == 0) {
@@ -172,7 +168,7 @@ ngx_linux_sendfile_chain(ngx_connection_t *c, ngx_chain_t *in, off_t limit)
 #endif
 
             n = ngx_linux_sendfile(c, file, file_size);
-
+            // printf("--- ngx_linux_sendfile %d\n", n == NGX_ERROR);
             if (n == NGX_ERROR) {
                 return NGX_CHAIN_ERROR;
             }
@@ -256,7 +252,7 @@ eintr:
     ngx_log_debug2(NGX_LOG_DEBUG_EVENT, c->log, 0,
                    "sendfile: @%O %uz", file->file_pos, size);
 
-    n = sendfile(c->fd, file->file->fd, &offset, size);
+    n = c_sendfile(c->fd, file->file->fd, &offset, size);
 
     if (n == -1) {
         err = ngx_errno;
