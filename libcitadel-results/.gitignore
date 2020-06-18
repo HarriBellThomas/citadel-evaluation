@@ -1,0 +1,3 @@
+# Only include tar.gz versions.
+citadel_benchmarks
+native_benchmarks
